@@ -1,50 +1,44 @@
 package org.example.operations
 
 import org.example.Cpu6502
-import org.example.absolute
-import org.example.absoluteX
-import org.example.absoluteY
-import org.example.immediate
-import org.example.indirectX
-import org.example.indirectY
-import org.example.util.U8
-import org.example.util.toU8
-import org.example.zeroPage
-import org.example.zeroPageX
+import org.example.get
+import org.example.set
+import org.example.util.U16
 
 /**
  * Data from memory -> accumulator
  * Effected flags: zero, negative
  */
 
-class LDA(private val cpu: Cpu6502) {
-    fun indirectY() = cpu.apply {
-        val operand = cpu.indirectY()
-        zeroFlag = operand == 0u.toU8()
-        negativeFlag = operand.isSetAt(bit = 7)
-    }
-}
-
-fun Cpu6502.lda(operand: U8) {
+fun Cpu6502.lda(effectiveAddress: U16) {
+    val operand = memory[effectiveAddress]
     accumulator = operand
-    negativeFlag = operand.isSetAt(bit = 7)
-    zeroFlag = operand == 0u.toU8()
+    negativeFlag = operand.getBit(bit = 7)
+    zeroFlag = operand.isZero()
 }
 
-fun Cpu6502.ldx(operand: U8) {
+fun Cpu6502.ldx(effectiveAddress: U16) {
+    val operand = memory[effectiveAddress]
     x = operand
-    negativeFlag = operand.isSetAt(bit = 7)
-    zeroFlag = operand == 0u.toU8()
+    negativeFlag = operand.getBit(bit = 7)
+    zeroFlag = operand.isZero()
 }
 
-fun Cpu6502.ldy(operand: U8) {
+fun Cpu6502.ldy(effectiveAddress: U16) {
+    val operand = memory[effectiveAddress]
     y = operand
-    negativeFlag = operand.isSetAt(bit = 7)
-    zeroFlag = operand == 0u.toU8()
+    negativeFlag = operand.getBit(bit = 7)
+    zeroFlag = operand.isZero()
 }
 
-fun Cpu6502.ldy(operand: U8) {
-    y = operand
-    negativeFlag = operand.isSetAt(bit = 7)
-    zeroFlag = operand == 0u.toU8()
+fun Cpu6502.sta(effectiveAddress: U16) {
+    memory[effectiveAddress] = accumulator
+}
+
+fun Cpu6502.stx(effectiveAddress: U16) {
+    memory[effectiveAddress] = x
+}
+
+fun Cpu6502.sty(effectiveAddress: U16) {
+    memory[effectiveAddress] = y
 }

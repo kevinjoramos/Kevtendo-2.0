@@ -1,7 +1,8 @@
-package org.example
+package org.example.operations
 
+import org.example.Cpu6502
+import org.example.get
 import org.example.util.U16
-import org.example.util.U8
 
 
 /**
