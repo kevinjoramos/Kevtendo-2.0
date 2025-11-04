@@ -5,6 +5,7 @@ import org.example.util.U16
 import org.example.util.toU16
 import org.example.set
 import org.example.get
+import org.example.util.combineHigh
 import org.example.util.toHighByte
 import org.example.util.toLowByte
 import org.example.util.toU8

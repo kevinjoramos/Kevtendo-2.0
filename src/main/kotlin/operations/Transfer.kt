@@ -1,6 +1,8 @@
 package org.example.operations
 
 import org.example.Cpu6502
+import org.example.util.getBit
+import org.example.util.isZero
 
 fun Cpu6502.tax() {
     x = accumulator

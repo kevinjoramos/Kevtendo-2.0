@@ -3,6 +3,8 @@ package org.example.operations
 import org.example.Cpu6502
 import org.example.util.U16
 import org.example.get
+import org.example.util.getBit
+import org.example.util.isZero
 import org.example.util.toU16
 import org.example.util.toU8
 

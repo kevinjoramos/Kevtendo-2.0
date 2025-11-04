@@ -3,6 +3,9 @@ package org.example.operations
 import org.example.Cpu6502
 import org.example.get
 import org.example.set
+import org.example.util.combineHigh
+import org.example.util.getBit
+import org.example.util.isZero
 import org.example.util.toU8
 
 fun Cpu6502.pha() {

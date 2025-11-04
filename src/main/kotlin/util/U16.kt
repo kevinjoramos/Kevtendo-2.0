@@ -28,23 +28,6 @@ value class U16(internal val data: UShort) : Comparable<U16> {
 
     fun inv(): U16 = this.data.inv().toU16()
 
-    fun isZero(): Boolean = this.data == 0u.toUShort()
-
-    fun getBit(bit: Int): Boolean {
-        require(bit in 0..15) { "Bit index out of range: $bit" }
-        return (this.data and 1u.shl(bit).toUShort()) > 0u
-    }
-
-    fun withClearedBit(bit: Int): U16 {
-        require(bit in 0..15) { "Bit index out of range: $bit" }
-        return (this.data and 1u.shl(bit).inv().toUShort()).toU16()
-    }
-
-    fun withSetBit(bit: Int): U16 {
-        require(bit in 0..15) { "Bit index out of range: $bit" }
-        return (this.data or 1u.shl(bit).toUShort()).toU16()
-    }
-
     fun toU8(): U8 = this.data.toU8()
 
     fun toUInt(): UInt = this.data.toUInt()

@@ -2,7 +2,7 @@ package org.example.operations
 
 import org.example.Cpu6502
 import org.example.get
-import org.example.util.U16
+import org.example.util.combineHigh
 
 
 /**
@@ -12,55 +12,55 @@ import org.example.util.U16
  */
     fun Cpu6502.implied() { programCounter++ }
 
-    fun Cpu6502.immediate(): U16 {
+    fun Cpu6502.immediate() {
         val operand = memory[programCounter]
         programCounter++
-        return operand.toU16()
+        effectiveAddress = operand.toU16()
     }
 
-    fun Cpu6502.absolute(): U16 {
+    fun Cpu6502.absolute() {
         val low = memory[programCounter]
         programCounter++
         val high = memory[programCounter]
         programCounter++
-        return low.combineHigh(high)
+        effectiveAddress = low.combineHigh(high)
     }
 
-    fun Cpu6502.absoluteX(): U16 {
+    fun Cpu6502.absoluteX() {
         val low = memory[programCounter]
         programCounter++
         val high = memory[programCounter]
         programCounter++
-        return low.combineHigh(high) + x
+        effectiveAddress = low.combineHigh(high) + x
     }
 
-    fun Cpu6502.absoluteY(): U16 {
+    fun Cpu6502.absoluteY() {
         val low = memory[programCounter]
         programCounter++
         val high = memory[programCounter]
         programCounter++
-        return low.combineHigh(high) + y
+        effectiveAddress = low.combineHigh(high) + y
     }
 
-    fun Cpu6502.zeroPage(): U16 {
+    fun Cpu6502.zeroPage() {
         val address = memory[programCounter]
         programCounter++
-        return address.toU16()
+        effectiveAddress = address.toU16()
     }
 
-    fun Cpu6502.zeroPageX(): U16 {
+    fun Cpu6502.zeroPageX() {
         val address = (memory[programCounter] + x)
         programCounter++
-        return address.toU16()
+        effectiveAddress = address.toU16()
     }
 
-    fun Cpu6502.zeroPageY(): U16 {
+    fun Cpu6502.zeroPageY() {
         val address = (memory[programCounter] + y)
         programCounter++
-        return address.toU16()
+        effectiveAddress = address.toU16()
     }
 
-    fun Cpu6502.indirect(): U16 {
+    fun Cpu6502.indirect() {
         val lookUpLow = memory[programCounter]
         programCounter++
         val lookUpHigh = memory[programCounter]
@@ -68,27 +68,27 @@ import org.example.util.U16
         val lookUpAddress = lookUpLow.combineHigh(lookUpHigh)
         val dataLow = memory[lookUpAddress]
         val dataHigh = memory[lookUpAddress.inc()]
-        return dataLow.combineHigh(dataHigh)
+        effectiveAddress = dataLow.combineHigh(dataHigh)
     }
 
-    fun Cpu6502.indirectX(): U16 {
+    fun Cpu6502.indirectX() {
         val lookUpAddress = (memory[programCounter] + x)
         programCounter++
         val operandAddress = memory[lookUpAddress].combineHigh(memory[lookUpAddress.inc()])
-        return operandAddress
+        effectiveAddress = operandAddress
     }
 
-    fun Cpu6502.indirectY(): U16 {
+    fun Cpu6502.indirectY() {
         val lookUpAddress = memory[programCounter]
         programCounter++
         val low = memory[lookUpAddress]
         val high = memory[lookUpAddress.inc()]
         val operandAddress = low.combineHigh(high) + y
-        return operandAddress
+        effectiveAddress = operandAddress
     }
 
-    fun Cpu6502.relative(): U16 {
+    fun Cpu6502.relative() {
         val offset = memory[programCounter]
         programCounter++
-        return (programCounter + offset)
+        effectiveAddress = (programCounter + offset)
     }

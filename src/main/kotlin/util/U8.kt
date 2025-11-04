@@ -28,25 +28,6 @@ value class U8(internal val data: UByte) : Comparable<U8> {
 
     fun inv(): U8 = this.data.inv().toU8()
 
-    fun isZero(): Boolean = this.data == 0u.toUByte()
-
-    fun getBit(bit: Int): Boolean {
-        require(bit in 0..7) { "Bit index out of range: $bit" }
-        return (this.data and 1u.shl(bit).toUByte()) > 0u
-    }
-
-    fun withClearedBit(bit: Int): U8 {
-        require(bit in 0..7) { "Bit index out of range: $bit" }
-        return (this.data and 1u.shl(bit).inv().toUByte()).toU8()
-    }
-
-    fun withSetBit(bit: Int): U8 {
-        require(bit in 0..7) { "Bit index out of range: $bit" }
-        return (this.data or 1u.shl(bit).toUByte()).toU8()
-    }
-
-    fun combineHigh(high: U8): U16 = (this or high.shl(8)).toU16()
-
     fun toU16(): U16 = this.data.toU16()
 
     fun toUInt(): UInt = this.data.toUInt()

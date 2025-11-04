@@ -3,6 +3,7 @@ package org.example.operations
 import org.example.Cpu6502
 import org.example.get
 import org.example.set
+import org.example.util.combineHigh
 import org.example.util.toHighByte
 import org.example.util.toLowByte
 import org.example.util.toU16

@@ -4,6 +4,8 @@ import org.example.Cpu6502
 import org.example.util.U16
 import org.example.get
 import org.example.set
+import org.example.util.getBit
+import org.example.util.isZero
 
 fun Cpu6502.dec(effectiveAddress: U16) {
     val result = memory[effectiveAddress].dec()
