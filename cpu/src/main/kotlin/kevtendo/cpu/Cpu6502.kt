@@ -79,15 +79,17 @@ import kevtendo.cpu.operations.zeroPageX
 import kevtendo.cpu.operations.zeroPageY
 import kevtendo.common.binary.U16
 import kevtendo.common.binary.U8
-import kevtendo.common.binary.U8Array
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.toU16
 import kevtendo.common.binary.toU8
 import kevtendo.common.binary.withBit
+import kevtendo.common.binary.Bus
+import kevtendo.common.binary.U8Array
+import kevtendo.common.binary.get
 
 
 class Cpu6502(
-    val memory: U8Array = U8Array(size = 65535),
+    val memory: Bus = U8Array(size = 65535),
 ) {
     var programCounter: U16 = 0x0000u.toU16()
     var status: U8 = 0x00u.toU8()

@@ -5,6 +5,7 @@ import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
 import kevtendo.common.binary.toU16
 import kevtendo.common.binary.toU8
+import kevtendo.common.binary.get
 
 // carry is +1 because each operation represents the next "segment" of addition. So this operation can be used for low and high bytes.
 // overflow only occurs when adding 2 positives produces a negative or adding 2 negatives produces a positive.

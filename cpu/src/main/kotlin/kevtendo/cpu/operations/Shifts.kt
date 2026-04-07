@@ -4,6 +4,8 @@ import kevtendo.cpu.Cpu6502
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
 import kevtendo.common.binary.withBit
+import kevtendo.common.binary.get
+import kevtendo.common.binary.set
 
 fun Cpu6502.asla() {
     val initial = accumulator

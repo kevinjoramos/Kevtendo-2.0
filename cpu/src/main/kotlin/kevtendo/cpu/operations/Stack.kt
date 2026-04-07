@@ -5,6 +5,8 @@ import kevtendo.common.binary.combineHigh
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
 import kevtendo.common.binary.toU8
+import kevtendo.common.binary.set
+import kevtendo.common.binary.get
 
 fun Cpu6502.pha() {
     memory[stackPointer.combineHigh(0x01u.toU8())] = accumulator

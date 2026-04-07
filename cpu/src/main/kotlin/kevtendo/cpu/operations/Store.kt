@@ -3,6 +3,8 @@ package kevtendo.cpu.operations
 import kevtendo.cpu.Cpu6502
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
+import kevtendo.common.binary.get
+import kevtendo.common.binary.set
 
 /**
  * Data from memory -> accumulator

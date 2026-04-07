@@ -1,8 +1,4 @@
-package kevtendo.app
-
-import kevtendo.common.binary.U16
-import kevtendo.common.binary.U8
-import kevtendo.common.binary.U8Array
+package kevtendo.common.binary
 
 typealias Bus = U8Array
 operator fun Bus.get(address: U8): U8 = this[address.toUInt().toInt()]

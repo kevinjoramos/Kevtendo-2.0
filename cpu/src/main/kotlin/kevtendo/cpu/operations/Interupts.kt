@@ -6,6 +6,8 @@ import kevtendo.common.binary.toHighByte
 import kevtendo.common.binary.toLowByte
 import kevtendo.common.binary.toU16
 import kevtendo.common.binary.toU8
+import kevtendo.common.binary.set
+import kevtendo.common.binary.get
 
 fun Cpu6502.irq() {
     if (!interruptDisableFlag) {

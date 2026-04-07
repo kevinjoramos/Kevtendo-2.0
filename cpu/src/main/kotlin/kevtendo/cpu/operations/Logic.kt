@@ -3,6 +3,7 @@ package kevtendo.cpu.operations
 import kevtendo.cpu.Cpu6502
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
+import kevtendo.common.binary.get
 
 fun Cpu6502.and() {
     accumulator = accumulator and memory[effectiveAddress!!]
