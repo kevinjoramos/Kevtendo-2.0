@@ -9,6 +9,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/apu" />
+            <option value="$PROJECT_DIR$/cartridge" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/cpu" />
+            <option value="$PROJECT_DIR$/ppu" />
           </set>
         </option>
       </GradleProjectSettings>
