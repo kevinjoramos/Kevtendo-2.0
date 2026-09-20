@@ -10,7 +10,7 @@ import kevtendo.common.binary.get
 // carry is +1 because each operation represents the next "segment" of addition. So this operation can be used for low and high bytes.
 // overflow only occurs when adding 2 positives produces a negative or adding 2 negatives produces a positive.
 fun Cpu6502.adc() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     val result =
         accumulator.toU16()
             .plus(operand.toU16())
@@ -30,7 +30,7 @@ fun Cpu6502.adc() {
 // carry is -1 because it represents the previous subtraction borrowing from this value.
 // overflow only occurs when subtracting a negative from a positive makes a negative or subtracting a positive from a negative makes a positive.
 fun Cpu6502.sbc() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     val result = accumulator
         .minus(operand)
         .minus(
@@ -49,7 +49,7 @@ fun Cpu6502.sbc() {
 }
 
 fun Cpu6502.cmp() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     val result = accumulator - operand
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
@@ -57,7 +57,7 @@ fun Cpu6502.cmp() {
 }
 
 fun Cpu6502.cpx() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     val result = x - operand
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
@@ -65,7 +65,7 @@ fun Cpu6502.cpx() {
 }
 
 fun Cpu6502.cpy() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     val result = y - operand
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()

@@ -31,6 +31,8 @@ value class U16(internal val data: UShort) : Comparable<U16> {
     fun toU8(): U8 = this.data.toU8()
 
     fun toUInt(): UInt = this.data.toUInt()
+
+    fun mod(other: U16): U16 = this.data.mod(other.data).toU16()
 }
 
 fun UInt.toU16(): U16 = U16(this.toUShort())

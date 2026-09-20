@@ -83,13 +83,11 @@ import kevtendo.common.binary.getBit
 import kevtendo.common.binary.toU16
 import kevtendo.common.binary.toU8
 import kevtendo.common.binary.withBit
-import kevtendo.common.binary.Bus
-import kevtendo.common.binary.U8Array
-import kevtendo.common.binary.get
+import kevtendo.common.mediator.Bus
 
 
 class Cpu6502(
-    val memory: Bus = U8Array(size = 65535),
+    val memory: Bus,
 ) {
     var programCounter: U16 = 0x0000u.toU16()
     var status: U8 = 0x00u.toU8()
@@ -141,7 +139,7 @@ class Cpu6502(
 
     fun runCycle() {
         if (cycleCount == 0) {
-            val opcode = memory[programCounter]
+            val opcode = memory.read(programCounter)
             programCounter++
             val instruction = InstructionSet.fetchInstruction(opcode)
             doOperation(instruction)

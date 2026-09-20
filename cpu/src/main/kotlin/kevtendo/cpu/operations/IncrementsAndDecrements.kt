@@ -1,14 +1,12 @@
 package kevtendo.cpu.operations
 
-import kevtendo.cpu.Cpu6502
 import kevtendo.common.binary.getBit
 import kevtendo.common.binary.isZero
-import kevtendo.common.binary.set
-import kevtendo.common.binary.get
+import kevtendo.cpu.Cpu6502
 
 fun Cpu6502.dec() {
-    val result = memory[effectiveAddress!!].dec()
-    memory[effectiveAddress!!] = result
+    val result = memory.read(effectiveAddress!!).dec()
+    memory.write(effectiveAddress!!, result)
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
 }
@@ -26,8 +24,8 @@ fun Cpu6502.dey() {
 }
 
 fun Cpu6502.inc() {
-    val result = memory[effectiveAddress!!].inc()
-    memory[effectiveAddress!!] = result
+    val result = memory.read(effectiveAddress!!).inc()
+    memory.write(effectiveAddress!!, result)
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
 }

@@ -20,76 +20,83 @@ import kevtendo.common.binary.*
     }
 
     fun Cpu6502.absolute() {
-        val low = memory[programCounter]
+
+        val test1 = 0x09u.toUByte()
+        val test2 = 0x09u.toUByte()
+
+        val result1 = test1 + test2
+        val result2 = test1.toUShort().
+
+        val low = memory.read(programCounter)
         programCounter++
-        val high = memory[programCounter]
+        val high = memory.read(programCounter)
         programCounter++
         effectiveAddress = low.combineHigh(high)
     }
 
     fun Cpu6502.absoluteX() {
-        val low = memory[programCounter]
+        val low = memory.read(programCounter)
         programCounter++
-        val high = memory[programCounter]
+        val high = memory.read(programCounter)
         programCounter++
         effectiveAddress = low.combineHigh(high) + x
     }
 
     fun Cpu6502.absoluteY() {
-        val low = memory[programCounter]
+        val low = memory.read(programCounter)
         programCounter++
-        val high = memory[programCounter]
+        val high = memory.read(programCounter)
         programCounter++
         effectiveAddress = low.combineHigh(high) + y
     }
 
     fun Cpu6502.zeroPage() {
-        val address = memory[programCounter]
+        val address = memory.read(programCounter)
         programCounter++
         effectiveAddress = address.toU16()
     }
 
     fun Cpu6502.zeroPageX() {
-        val address = (memory[programCounter] + x)
+        val address = (memory.read(programCounter) + x)
         programCounter++
         effectiveAddress = address.toU16()
     }
 
     fun Cpu6502.zeroPageY() {
-        val address = (memory[programCounter] + y)
+        val address = (memory.read(programCounter) + y)
         programCounter++
         effectiveAddress = address.toU16()
     }
 
     fun Cpu6502.indirect() {
-        val lookUpLow = memory[programCounter]
+        val lookUpLow = memory.read(programCounter)
         programCounter++
-        val lookUpHigh = memory[programCounter]
+        val lookUpHigh = memory.read(programCounter)
         programCounter++
         val lookUpAddress = lookUpLow.combineHigh(lookUpHigh)
-        val dataLow = memory[lookUpAddress]
-        val dataHigh = memory[lookUpAddress.inc()]
+        val dataLow = memory.read(lookUpAddress)
+        val dataHigh = memory.read(lookUpAddress.inc())
         effectiveAddress = dataLow.combineHigh(dataHigh)
     }
 
     fun Cpu6502.indirectX() {
-        val lookUpAddress = (memory[programCounter] + x)
+        val lookUpAddress = (memory.read(programCounter) + x)
         programCounter++
-        val operandAddress = memory[lookUpAddress].combineHigh(memory[lookUpAddress.inc()])
+        val operandAddress = memory.read(lookUpAddress).combineHigh(memory.read(lookUpAddress.inc()))
         effectiveAddress = operandAddress
     }
 
     fun Cpu6502.indirectY() {
-        val lookUpAddress = memory[programCounter]
+        val lookUpAddress = memory.read(programCounter)
         programCounter++
-        val low = memory[lookUpAddress]
-        val high = memory[lookUpAddress.inc()]
+        val low = memory.read(lookUpAddress)
+        val high = memory.read(lookUpAddress.inc())
         val operandAddress = low.combineHigh(high) + y
         effectiveAddress = operandAddress
     }
 
     fun Cpu6502.relative() {
-        val offset = memory[programCounter]
+        val offset = memory.read(programCounter)
         programCounter++
         effectiveAddress = (programCounter + offset)
     }

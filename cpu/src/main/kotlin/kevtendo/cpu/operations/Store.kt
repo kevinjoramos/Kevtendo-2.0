@@ -12,34 +12,34 @@ import kevtendo.common.binary.set
  */
 
 fun Cpu6502.lda() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     accumulator = operand
     negativeFlag = operand.getBit(bit = 7)
     zeroFlag = operand.isZero()
 }
 
 fun Cpu6502.ldx() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     x = operand
     negativeFlag = operand.getBit(bit = 7)
     zeroFlag = operand.isZero()
 }
 
 fun Cpu6502.ldy() {
-    val operand = memory[effectiveAddress!!]
+    val operand = memory.read(effectiveAddress!!)
     y = operand
     negativeFlag = operand.getBit(bit = 7)
     zeroFlag = operand.isZero()
 }
 
 fun Cpu6502.sta() {
-    memory[effectiveAddress!!] = accumulator
+    memory.write(effectiveAddress!!, accumulator)
 }
 
 fun Cpu6502.stx() {
-    memory[effectiveAddress!!] = x
+    memory.write(effectiveAddress!!, x)
 }
 
 fun Cpu6502.sty() {
-    memory[effectiveAddress!!] = y
+    memory.write(effectiveAddress!!, y)
 }

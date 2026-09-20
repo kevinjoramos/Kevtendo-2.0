@@ -16,9 +16,9 @@ fun Cpu6502.asla() {
 }
 
 fun Cpu6502.asl() {
-    val initial = memory[effectiveAddress!!]
+    val initial = memory.read(effectiveAddress!!)
     val result = initial.shl(1)
-    memory[effectiveAddress!!] = result
+    memory.write(effectiveAddress!!, result)
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
     carryFlag = initial.getBit(7)
@@ -33,9 +33,9 @@ fun Cpu6502.lsra() {
 }
 
 fun Cpu6502.lsr() {
-    val initial = memory[effectiveAddress!!]
+    val initial = memory.read(effectiveAddress!!)
     val result = initial.shr(1)
-    memory[effectiveAddress!!] = result
+    memory.write(effectiveAddress!!, result)
     negativeFlag = false
     zeroFlag = result.isZero()
     carryFlag = initial.getBit(0)
@@ -50,9 +50,9 @@ fun Cpu6502.rola() {
 }
 
 fun Cpu6502.rol() {
-    val initial = memory[effectiveAddress!!]
+    val initial = memory.read(effectiveAddress!!)
     val result = initial.shl(1).withBit(0, carryFlag)
-    memory[effectiveAddress!!] = result
+    memory.write(effectiveAddress!!, result)
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
     carryFlag = initial.getBit(7)
@@ -67,9 +67,9 @@ fun Cpu6502.rora() {
 }
 
 fun Cpu6502.ror() {
-    val initial = memory[effectiveAddress!!]
+    val initial = memory.read(effectiveAddress!!)
     val result = initial.shr(1).withBit(7, carryFlag)
-    memory[effectiveAddress!!] = result
+    memory.write(effectiveAddress!!, result)
     negativeFlag = result.getBit(7)
     zeroFlag = result.isZero()
     carryFlag = initial.getBit(0)

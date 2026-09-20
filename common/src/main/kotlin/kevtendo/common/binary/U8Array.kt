@@ -37,3 +37,8 @@ internal constructor(@PublishedApi internal val storage: UByteArray) : Collectio
 inline fun U8Array(size: Int, init: (Int) -> U8) : U8Array {
     return U8Array(UByteArray(size) { index -> init(index).toUInt().toUByte() })
 }
+
+@OptIn(ExperimentalUnsignedTypes::class)
+fun ByteArray.toU8Array(): U8Array {
+    return U8Array(this.toUByteArray())
+}

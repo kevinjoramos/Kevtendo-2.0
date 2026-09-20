@@ -31,8 +31,11 @@ value class U8(internal val data: UByte) : Comparable<U8> {
     fun toU16(): U16 = this.data.toU16()
 
     fun toUInt(): UInt = this.data.toUInt()
+
+    fun toInt(): Int = this.data.toInt()
 }
 
 fun UInt.toU8(): U8 = U8(this.toUByte())
 fun UShort.toU8(): U8 = U8(this.toUByte())
 fun UByte.toU8(): U8 = U8(this)
+fun Byte.toU8(): U8 = U8(this.toUByte())

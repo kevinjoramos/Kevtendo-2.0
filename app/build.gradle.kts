@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":cpu"))
     implementation(project(":ppu"))
     implementation(project(":apu"))

@@ -11,25 +11,25 @@ import kevtendo.common.binary.get
 
 fun Cpu6502.irq() {
     if (!interruptDisableFlag) {
-        memory[stackPointer.combineHigh(0x01u.toU8())] = programCounter.toHighByte()
+        memory.write(stackPointer.combineHigh(0x01u.toU8()), programCounter.toHighByte())
         stackPointer--
-        memory[stackPointer.combineHigh(0x01u.toU8())] = programCounter.toLowByte()
+        memory.write(stackPointer.combineHigh(0x01u.toU8()), programCounter.toLowByte())
         stackPointer--
-        memory[stackPointer.combineHigh(0x01u.toU8())] = status
+        memory.write(stackPointer.combineHigh(0x01u.toU8()), status)
         stackPointer--
-        programCounter = memory[IrqVector.inc()].combineHigh(memory[IrqVector])
+        programCounter = memory.read(IrqVector.inc()).combineHigh(memory.read(IrqVector))
     }
 }
 
 
 fun Cpu6502.nmi() {
-    memory[stackPointer.combineHigh(0x01u.toU8())] = programCounter.toHighByte()
+    memory.write(stackPointer.combineHigh(0x01u.toU8()), programCounter.toHighByte())
     stackPointer--
-    memory[stackPointer.combineHigh(0x01u.toU8())] = programCounter.toLowByte()
+    memory.write(stackPointer.combineHigh(0x01u.toU8()), programCounter.toLowByte())
     stackPointer--
-    memory[stackPointer.combineHigh(0x01u.toU8())] = status
+    memory.write(stackPointer.combineHigh(0x01u.toU8()), status)
     stackPointer--
-    programCounter = memory[NmiVector.inc()].combineHigh(memory[NmiVector])
+    programCounter = memory.read(NmiVector.inc()).combineHigh(memory.read(NmiVector))
 }
 
 private val IrqVector = 0xFFFAu.toU16()
