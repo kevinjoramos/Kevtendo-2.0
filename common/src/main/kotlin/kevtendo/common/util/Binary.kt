@@ -1,7 +1,7 @@
 package kevtendo.common.util
 
-fun Int.maskTo8Bits() = this and 0xFF
-fun Int.maskTo16Bits() = this and 0xFFFF
+fun Int.maskTo8Bits(): Int = this and 0xFF
+fun Int.maskTo16Bits(): Int = this and 0xFFFF
 
 fun Int.getBit(bit: Int): Boolean {
     require(bit in 0..15) { "Bit index out of range: $bit" }

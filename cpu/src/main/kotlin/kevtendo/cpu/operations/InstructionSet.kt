@@ -1,6 +1,7 @@
 package kevtendo.cpu.operations
 
 import kevtendo.common.binary.U8
+import kevtendo.cpu.Cpu6502
 
 object InstructionSet {
 

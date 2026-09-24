@@ -77,26 +77,36 @@ import kevtendo.cpu.operations.tya
 import kevtendo.cpu.operations.zeroPage
 import kevtendo.cpu.operations.zeroPageX
 import kevtendo.cpu.operations.zeroPageY
-import kevtendo.common.binary.U16
-import kevtendo.common.binary.U8
-import kevtendo.common.binary.getBit
-import kevtendo.common.binary.toU16
-import kevtendo.common.binary.toU8
-import kevtendo.common.binary.withBit
 import kevtendo.common.mediator.Bus
+import kevtendo.common.util.getBit
+import kevtendo.common.util.maskTo16Bits
+import kevtendo.common.util.maskTo8Bits
+import kevtendo.common.util.withBit
 
 
 class Cpu6502(
     val memory: Bus,
 ) {
-    var programCounter: U16 = 0x0000u.toU16()
-    var status: U8 = 0x00u.toU8()
-    var stackPointer: U8 = 0x00u.toU8()
-    var accumulator: U8 = 0x00u.toU8()
-    var x: U8 = 0x00u.toU8()
-    var y: U8 = 0x00u.toU8()
 
-    var effectiveAddress: U16? = null
+
+    var programCounter: Int = 0x0000
+        set(value) { field = value.maskTo16Bits() }
+
+    var status: Int = 0x00
+        set(value) { field = value.maskTo8Bits() }
+
+    var stackPointer: Int = 0x00
+        set(value) { field = value.maskTo8Bits() }
+
+    var accumulator: Int = 0x00
+        set(value) { field = value.maskTo8Bits() }
+
+    var x: Int = 0x00
+        set(value) { field = value.maskTo8Bits() }
+
+    var y: Int = 0x00
+        set(value) { field = value.maskTo8Bits() }
+
     var cycleCount = 0
 
     var negativeFlag: Boolean
